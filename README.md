@@ -28,9 +28,17 @@ mediassist-pro/
 │   │   ├── vector_store.py      # Interface avec ChromaDB/FAISS
 │   │   └── user_service.py      # CRUD Utilisateurs
 │   └── main.py             # Initialisation de l'application FastAPI
-├── data/                   # Volume pour la base vectorielle (ChromaDB)
-├── migrations/             # Fichiers Alembic (Evolution DB)
-├── tests/                  # Tests unitaires et d'intégration (Pytest)
+├── data/
+│   ├── vector_store/      # Données indexées de ChromaDB
+│   └── uploads/           # PDF sources (ex: manuels ELISA) [cite: 9, 136]
+├── migrations/
+│   ├── env.py
+│   ├── script.py.mako
+│   └── versions/          # Historique des changements PostgreSQL
+├── tests/
+│   ├── conftest.py        # Fixtures globales
+│   ├── test_api/          # Tests d'intégration (FastAPI)
+│   └── test_services/     # Tests unitaires (LangChain, Business Logic)                 # Tests unitaires et d'intégration (Pytest)
 ├── docker-compose.yml      # Orchestration (API, Postgres, VectorDB)
 ├── Dockerfile              # Image Docker de l'application
 ├── requirements.txt        # Dépendances Python
