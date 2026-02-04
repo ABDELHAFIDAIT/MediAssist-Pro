@@ -11,7 +11,7 @@ class RAGService :
     def __init__(self):
         self.llm = Ollama(
             base_url=settings.OLLAMA_BASE_URL,
-            settings=settings.LLM_MODEL
+            model=settings.LLM_MODEL
         )
         
         self.template = """Vous êtes MediAssist Pro, un assistant expert en maintenance de matériel médical.
