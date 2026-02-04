@@ -19,3 +19,6 @@ pdf2image
 py-cpuinfo
 pytest
 requests
+langchain-experimental
+langchain-unstructured
+langchain-core
