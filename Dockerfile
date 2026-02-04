@@ -3,11 +3,12 @@ FROM python:3.11-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
+    libmagic-dev \
     poppler-utils \
     tesseract-ocr \
-    libmagic1 \
+    libtesseract-dev \
+    libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
