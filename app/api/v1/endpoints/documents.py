@@ -1,6 +1,6 @@
 import os
 import shutil
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Depends
 from langchain_unstructured import UnstructuredLoader
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
@@ -8,13 +8,14 @@ from app.services.vector_store import vector_store_service
 from app.core.config import settings
 from langchain_core.documents import Document
 from langchain_community.vectorstores.utils import filter_complex_metadata
-
+from app.api.v1.deps import get_current_user
+from app.db.models.user import User
 
 router = APIRouter()
 
 
 @router.post("/upload")
-async def uplaod_document(file: UploadFile = File(...)) :
+async def uplaod_document(file: UploadFile = File(...), current_user: User = Depends(get_current_user)) :
     if not file.filename.endswith(".pdf") :
         raise HTTPException(status_code=404, detail="Seuls les fichiers PDF sont accéptés !")
     
@@ -67,7 +68,7 @@ async def uplaod_document(file: UploadFile = File(...)) :
 
 
 @router.get("/debug-chunks")
-async def get_chunks(limit: int = 10):
+async def get_chunks(limit: int = 10, current_user: User = Depends(get_current_user)):
     vector_store = vector_store_service.get_vector_store()
     results = vector_store.get(limit=limit)
     
