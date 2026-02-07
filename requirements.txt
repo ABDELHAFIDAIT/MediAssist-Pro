@@ -25,3 +25,10 @@ py-cpuinfo
 pytest
 requests
 beautifulsoup4
+langgraph
+qdrant-client
+langchain-qdrant
+langchain-huggingface
+sentence-transformers
+pydantic
+python-dotenv

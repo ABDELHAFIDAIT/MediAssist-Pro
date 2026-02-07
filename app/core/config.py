@@ -25,6 +25,13 @@ class Settings(BaseSettings) :
     CHROMA_PERSIST_DIRECTORY : str
     UPLOADS_DIRECTORY : str
     
+    QDRANT_URL: str 
+    QDRANT_API_KEY: str | None 
+    QDRANT_COLLECTION_NAME: str 
+
+    CHUNK_SIZE: int 
+    CHUNK_OVERLAP: int 
+    
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=True,
