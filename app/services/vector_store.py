@@ -1,6 +1,6 @@
 import os
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import OllamaEmbeddings
+from langchain_chroma import Chroma
 from app.core.config import settings
 
 class VectorService :
@@ -27,9 +27,16 @@ class VectorService :
         vector_store.add_documents(documents)
         
     
-    def search_relevant_context(self, query: str, k: int) :
+    def as_agent_retriever(self, search_type="mmr", k=5) :
         vector_store = self.get_vector_store()
-        return vector_store.similarity_search(query=query, k=k)
+        return vector_store.as_retriever(
+            search_type=search_type,
+            search_kwargs={
+                "k" : k,
+                "fetch_k" : 20,
+                "lambda_mult" : 0.5
+            }
+        )
 
 
 
