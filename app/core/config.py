@@ -30,7 +30,10 @@ class Settings(BaseSettings) :
     QDRANT_COLLECTION_NAME: str 
 
     CHUNK_SIZE: int 
-    CHUNK_OVERLAP: int 
+    CHUNK_OVERLAP: int
+    
+    MLFLOW_TRACKING_URI : str
+    MLFLOW_EXPERIMENT_NAME : str
     
     model_config = SettingsConfigDict(
         env_file=".env",
