@@ -33,3 +33,4 @@ sentence-transformers
 pydantic
 python-dotenv
 mlflow
+deepeval
