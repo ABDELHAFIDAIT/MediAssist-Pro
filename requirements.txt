@@ -34,3 +34,6 @@ pydantic
 python-dotenv
 mlflow
 deepeval
+flashrank
+langchain-classic
+langchain-google-genai

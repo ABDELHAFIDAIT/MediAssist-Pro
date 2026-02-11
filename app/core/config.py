@@ -35,6 +35,9 @@ class Settings(BaseSettings) :
     MLFLOW_TRACKING_URI : str
     MLFLOW_EXPERIMENT_NAME : str
     
+    OPENAI_API_KEY: str
+    GEMINI_API_KEY: str
+    
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=True,

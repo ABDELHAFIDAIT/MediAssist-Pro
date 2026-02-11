@@ -4,6 +4,7 @@ from app.db.session import engine, Base
 from app.db.models.user import User
 from app.db.models.query import Query
 from app.api.v1.api import api_router
+from app.core.exceptions import MediAssistException, mediassist_exception_handler
 
 
 Base.metadata.create_all(bind=engine)
@@ -13,6 +14,7 @@ app = FastAPI(
     version=settings.VERSION
 )
 
+app.add_exception_handler(MediAssistException, mediassist_exception_handler)
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
