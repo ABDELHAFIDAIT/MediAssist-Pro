@@ -1,0 +1,41 @@
+name: MediAssist-Pro CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubunto-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependancies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest-asyncio
+      
+      - name: Run Tests
+        run: pytest tests/
+  
+  build-and-push :
+    needs: test
+    runs-on: ubunto-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and Push
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/mediassist-api:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mediassist-api:latest
