@@ -62,6 +62,7 @@ services:
     env_file:
       - .env
     environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
       - GIT_PYTHON_REFRESH=quiet
     volumes:
       - ./app:/app/app

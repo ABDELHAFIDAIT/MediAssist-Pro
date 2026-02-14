@@ -36,8 +36,7 @@ async def chat_with_expert(
 ):
     try:
         ai_response = await rag_service.answer_question(
-            question=request.message, 
-            user_id=current_user.id
+            question=request.message
         )
 
         new_query = Query(
